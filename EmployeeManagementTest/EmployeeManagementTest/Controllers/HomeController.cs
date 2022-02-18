@@ -3,6 +3,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Web.Mvc;
+using System.Web.Routing;
 
 namespace EmployeeManagementTest.Controllers
 {
@@ -83,7 +84,7 @@ namespace EmployeeManagementTest.Controllers
                 else
                 {
                     ViewBag.error = "Login failed";
-                    return RedirectToAction("Login");
+                    return View();
                 }
             }
             return View();
