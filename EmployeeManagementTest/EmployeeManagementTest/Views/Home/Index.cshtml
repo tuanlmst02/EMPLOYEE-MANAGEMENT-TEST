@@ -6,14 +6,14 @@
     <div class="col-md-4">
         <div class="card">
             <div class="card-header">
-                Wellcome
+                <h3>Wellcome</h3>
             </div>
             <div class="card-body">
                 @if (Session["FullName"] != null)
                 {
-                    <p>Name: @Session["FullName"].ToString()</p>
-                    <p>Email: @Session["Email"].ToString()</p>
-                    <a href="@Url.Action("Logout","Home")" class="btn btn-warning">Logout</a>
+                    <h4>Name: @Session["FullName"].ToString()</h4>
+                    <h4>Email: @Session["Email"].ToString()</h4>
+                    <a href="@Url.Action("Logout","Home")" class="btn btn-danger">Logout</a>
                 }
             </div>
         </div>

@@ -1,10 +1,7 @@
 ﻿using EmployeeManagementTest.Models;
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
-using System.Web;
 using System.Web.Mvc;
 
 namespace EmployeeManagementTest.Controllers
@@ -15,14 +12,7 @@ namespace EmployeeManagementTest.Controllers
         // GET: Home
         public ActionResult Index()
         {
-            if (Session["ID"] != null)
-            {
-                return View();
-            }
-            else
-            {
-                return RedirectToAction("Login");
-            }
+            return View();
         }
 
         //GET: Register
@@ -31,7 +21,11 @@ namespace EmployeeManagementTest.Controllers
             return View();
         }
 
-        //POST: Register
+        /// <summary>
+        /// Register
+        /// </summary>
+        /// <param name="_user"></param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Register(User _user)
@@ -45,28 +39,29 @@ namespace EmployeeManagementTest.Controllers
                     _db.Configuration.ValidateOnSaveEnabled = false;
                     _db.Users.Add(_user);
                     _db.SaveChanges();
-                    return RedirectToAction("Index");
+                    return RedirectToAction("Login");
                 }
                 else
                 {
                     ViewBag.error = "Email already exists";
                     return View();
                 }
-
-
             }
             return View();
-
-
         }
 
+        //GET: Login
         public ActionResult Login()
         {
             return View();
         }
 
-
-
+        /// <summary>
+        /// Login
+        /// </summary>
+        /// <param name="email"></param>
+        /// <param name="password"></param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Login(string email, string password)
@@ -94,17 +89,35 @@ namespace EmployeeManagementTest.Controllers
             return View();
         }
 
+        //GET: News
+        public ActionResult News()
+        {
+            if (Session["ID"] != null)
+            {
+                return View();
+            }
+            else
+            {
+                ViewBag.Message = "You need to login to access this page";
+                return View();
+            }
+        }
 
-        //Logout
+        /// <summary>
+        /// Logout
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Logout()
         {
             Session.Clear();//remove session
             return RedirectToAction("Login");
         }
 
-
-
-        //create a string MD5
+        /// <summary>
+        /// create a string MD5
+        /// </summary>
+        /// <param name="str"></param>
+        /// <returns></returns>
         public static string GetMD5(string str)
         {
             MD5 md5 = new MD5CryptoServiceProvider();
