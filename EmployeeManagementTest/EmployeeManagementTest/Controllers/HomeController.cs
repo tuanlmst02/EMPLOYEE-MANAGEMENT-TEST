@@ -119,7 +119,7 @@ namespace EmployeeManagementTest.Controllers
         /// </summary>
         /// <param name="str"></param>
         /// <returns></returns>
-        public static string GetMD5(string str)
+        private static string GetMD5(string str)
         {
             MD5 md5 = new MD5CryptoServiceProvider();
             byte[] fromData = Encoding.UTF8.GetBytes(str);
